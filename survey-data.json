@@ -1,0 +1,173 @@
+[
+    {
+    "title": "Mobile Phone Usage Survey",
+    "referenceId": "This Survey is to collect Mobile user details:",
+    "pollItems": [
+    {
+    "pollId": 1,
+    "pollQuestion": "What type of mobile phone do you use?",
+    "pollQuestionId": 101,
+    "pollType": 5,
+    "pollOptions": [
+    {
+    "option": "Cell phone",
+    "optionLabel": "Cell phone",
+    "response": "Cell phone",
+    "nextPollId": 2,
+    "optionId": 1,
+    "parentId": -1
+    },
+    {
+    "option": "Smartphone",    
+    "optionLabel": "Smartphone",
+    "response": "Smartphone",
+    "nextPollId": 2,
+    "optionId": 2,
+    "parentId": -1
+    },
+    {
+    "option":"Don't use a mobile phone",
+    "optionLabel": "Don't use a mobile phone",
+    "response": "Don't use a mobile phone",
+    "nextPollId": 2,
+    "optionId": 3,
+    "parentId": -1
+    }
+    ],
+    "questionDisplay": "What type of mobile phone do you use? Select one option:\n1. Cell phone\n2. Smartphone\n3. Don't use a mobile phone\n"
+    },
+    {
+    "pollId": 2,
+    "pollQuestion": "Is the area code of your mobile phone different than the area codes where you live?",
+    "pollQuestionId": 102,
+    "pollType": 3,
+    "pollOptions": [
+    {
+    "option":"Yes",
+    "optionLabel": "Yes",
+    "response": "Yes",
+    "nextPollId": 3,
+    "optionId": 1,
+    "parentId": -1
+    },
+    {
+    "option":"No",
+    "optionLabel": "No",
+    "response": "No",
+    "nextPollId": 3,
+    "optionId": 2,
+    "parentId": -1
+    }
+    ],
+    "questionDisplay": "Is the area code of your mobile phone different than the area codes where you live? Select one option:\n1. Yes\n2. No"
+    },
+    {
+    "pollId": 3,
+    "pollQuestion": "Have you taken part in electronic surveys?",
+    "pollQuestionId": 103,
+    "pollType": 3,
+    "pollOptions": [
+    {
+    "option":"Yes",
+    "optionLabel": "Yes",
+    "response": "Yes",
+    "nextPollId": 4,
+    "optionId": 1,
+    "parentId": -1
+    },
+    {
+    "option":"No",
+    "optionLabel": "No",
+    "response": "No",
+    "nextPollId": 4,
+    "optionId": 2,
+    "parentId": -1
+    }
+    
+    ],
+    "questionDisplay": "Have you taken part in electronic surveys?\n1. Yes\n2. No"
+    
+    },
+    {
+    "pollId": 4,
+    "pollQuestion": "Which of the following electronic survey types have you used?",
+    "pollQuestionId": 1004,
+    "pollType": 1,
+    "pollOptions": [
+    {
+    "optionLabel": "Web Surveys",
+    "response": "Web Surveys",
+    "optionId": 1,
+    "parentId": -1
+    },
+    {
+    "optionLabel": "Email Surveys",
+    "response": "Email Surveys",
+    "optionId": 2,
+    "parentId": -1
+    },
+    {
+    "optionLabel": "SMS Surveys",
+    "response": "SMS Surveys",
+    "optionId": 3,
+    "parentId": -1
+    },
+    {
+    "optionLabel": "Social Media Surveys",
+    "response": "Social Media Surveys",
+    "optionId": 4,
+    "parentId": -1
+    },
+    {
+    "optionLabel": "Phone Surveys",
+    "response": "Phone Surveys",
+    "optionId": 5,
+    "parentId": -1
+    }
+    ],
+    "questionDisplay": "Which of the following electronic survey types have you used? Select all that apply. \n1. Web surveys \n2. Email surveys \n3. SMS surveys \n4. Social media surveys \n5. Phone surveys. Please enter the option number(s) separated by a comma. "
+    },
+    {
+        "pollid": 0,
+        "question": "Which of the following times would you be able to meet?",
+        "pollType": 5,
+        "pollOptions": [
+          {
+            "option": "Monday 10am",
+            "response": "a",
+            "grammar": ".*\\W?[aA]\\W?.*",
+            "nextpollid": "",
+            "optionId": -1,
+            "parentId": -1
+          },
+          {
+            "option": "Tuesday 9am",
+            "response": "b",
+            "grammar": ".*\\W?[bB]\\W?.*",
+            "nextpollid": "",
+            "optionId": -1,
+            "parentId": -1
+          },
+          {
+            "option": "Thursday 11am",
+            "response": "c",
+            "grammar": ".*\\W?[cC]\\W?.*",
+            "nextpollid": "",
+            "optionId": -1,
+            "parentId": -1
+          },
+          {
+            "option": "Thursday 4pm",
+            "response": "d",
+            "grammar": ".*\\W?[dD]\\W?.*",
+            "nextpollid": "",
+            "optionId": -1,
+            "parentId": -1
+          }
+        ],
+        "questionDisplay": "Which of the following times would you be able to meet at? (comma separate ex: a,c) reply (a)Monday 10am (b)Tuesday 9am (c)Thursday 11am (d)Thursday 4pm "
+      },
+    {"pollid":0,"id":"429","question":"On a scale of 1 - 5 (5 being the highest) overall how would you rate the survey?","pollType":2,"pollOptions":[{"option":"","response":"valid number","grammar":"\\d+","nextpollid":"","optionId":1028,"parentId":429}],"questionDisplay":"On a scale of 1 - 5 (5 being the highest) overall how would you rate the event? reply (valid number) " }
+    ]
+}
+]
