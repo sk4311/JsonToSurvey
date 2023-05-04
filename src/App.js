@@ -38,14 +38,16 @@ function App() {
     fileReader.readAsText(e.target.files[0]);
     setFileInput(e.target.value);
   }
-  function handleResponse(question, response) {
-    setResponses((prevState) => ({
-      ...prevState,
-      [question.pollid]: response,
-    }));
-  }
+  
+  
 
   function renderQuestion(question) {
+    if (question.condition) {
+    const { question: q, answer: a } = question.condition;
+    if (responses[q] !== a) {
+      return null;
+    }
+  }
     switch (question.pollType) {
       case 0: // No response/statement only
         return (
@@ -123,16 +125,52 @@ function App() {
             <button>Playback</button>
           </div>
         );
+        case 7: // List
+        return (
+        <div key={question.pollid}>
+        <h3>{question.questionDisplay}</h3>
+        <select onChange={(e) => handleResponse(question, e.target.value)}>
+        {question.countryList.map((option, index) => (
+        <option key={index} value={option}>
+        {option}
+        </option>
+        ))}
+        </select>
+        </div>
+        );
       default:
         return null; // Unsupported question type
     }
   }
- 
-
+  function handleResponse(question, response) {
+    setResponses((prevState) => ({
+      ...prevState,
+      [question.pollQuestion]: {
+        pollid: question.pollid,
+        response: response,
+      },
+    }));
+  }
+  
   function handleDownload() {
+    const surveyData = survey.pollItems.map((item) => {
+      const response = responses[item.pollQuestion];
+      let formattedResponse = '';
+      if (response) {
+        if (Array.isArray(response.response)) {
+          formattedResponse = response.response.map((option) => option.optionLabel);
+        } else {
+          formattedResponse = response.response.optionLabel || response.response;
+        }
+      }
+      return {
+        question: item.pollQuestion,
+        response: formattedResponse,
+        pollid: item.pollid,
+      };
+    });
     const data = {
-      survey: survey,
-      responses: responses,
+      survey: surveyData,
     };
     const fileName = "survey_responses.json";
     const contentType = "application/json;charset=utf-8;";
@@ -147,8 +185,13 @@ function App() {
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
+      URL.revokeObjectURL(downloadLink);
     }
   }
+  
+  
+  
+  
 
   
   
