@@ -33,8 +33,25 @@ function App() {
   //     setError("Invalid JSON format");
   //   }
   // }
-  
-  
+
+  // function handleFileChange(e) {
+  //   const fileReader = new FileReader();
+  //   fileReader.onload = (e) => {
+  //     try {
+  //       const inputJson = JSON.parse(e.target.result);
+  //       if (Array.isArray(inputJson) && inputJson.length > 0) {
+  //         setSurvey(inputJson[0]);
+  //         setError(null);
+  //       } else {
+  //         setError("Input must be an array of survey questions");
+  //       }
+  //     } catch (e) {
+  //       setError("Invalid JSON format");
+  //     }
+  //   };
+  //   fileReader.readAsText(e.target.files[0]);
+  //   setFileInput(e.target.value);
+  // }
   
 
   function renderQuestion(question) {
@@ -209,6 +226,47 @@ function App() {
     alert(output);
   }
   
+
+  
+  
+  // function handleDownload() {
+  //   const surveyData = survey.pollItems.map((item) => {
+  //     const response = responses[item.pollQuestion];
+  //     let formattedResponse = '';
+  //     if (response) {
+  //       if (Array.isArray(response.response)) {
+  //         formattedResponse = response.response.map((option) => option.optionLabel);
+  //       } else {
+  //         formattedResponse = response.response.optionLabel || response.response;
+  //       }
+  //     }
+  //     return {
+  //       question: item.pollQuestion,
+  //       response: formattedResponse,
+  //       pollid: item.pollid,
+  //     };
+  //   });
+  //   const data = {
+  //     survey: surveyData,
+  //   };
+  //   const fileName = "survey_responses.json";
+  //   const contentType = "application/json;charset=utf-8;";
+  //   const blob = new Blob([JSON.stringify(data)], { type: contentType });
+  //   if (navigator.msSaveBlob) {
+  //     navigator.msSaveBlob(blob, fileName);
+  //   } else {
+  //     const downloadLink = URL.createObjectURL(blob);
+  //     const a = document.createElement("a");
+  //     a.href = downloadLink;
+  //     a.download = fileName;
+  //     document.body.appendChild(a);
+  //     a.click();
+  //     document.body.removeChild(a);
+  //     URL.revokeObjectURL(downloadLink);
+  //   }
+  // }
+  
+  
   
   
 
@@ -227,6 +285,6 @@ function App() {
       <button onClick={handleSubmit}>Submit</button>
     </div>
   );
-      }
+  }
 
 export default App;
