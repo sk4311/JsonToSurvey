@@ -38,7 +38,7 @@
   color: red;
   margin-top: 20px;
   }
-input {
+select, input {
 padding: 10px;
 border: none;
 border-radius: 5px;

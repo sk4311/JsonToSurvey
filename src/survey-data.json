@@ -1,0 +1,132 @@
+[
+  {
+  "title": "Mobile Phone Usage Survey",
+  "referenceId": "This Survey is to collect Mobile user details:",
+  "pollItems": [
+  {
+  "pollId": 1,
+  "pollQuestionId": 101,
+  "pollQuestion": "What type of mobile phone do you use?",
+  "pollType": 4,
+  "questionDisplay": "What type of mobile phone do you use? Select one option:\n1. Cell phone\n2. Smartphone\n3. Don't use a mobile phone\n",
+  "pollOptions": [
+  {
+  "option": "Cell phone",
+  "optionLabel": "Cell phone",
+  "response": "Cell phone",
+  "optionId": 1,
+  "parentId": -1,
+  "nextPollId": 2
+  },
+  {
+  "option": "Smartphone",
+  "optionLabel": "Smartphone",
+  "response": "Smartphone",
+  "optionId": 1,
+  "parentId": -1,
+  "nextPollId": 2
+  },
+  {
+  "option": "Don't use a mobile phone",
+  "optionLabel": "Don't use a mobile phone",
+  "response": "Don't use a mobile phone",
+  "optionId": 1,
+  "parentId": -1,
+  "nextPollId": 2
+  }
+  ]
+  },
+  {
+  "pollId": 2,
+  "pollQuestionId": 102,
+  "pollQuestion": "Is the area code of your mobile phone different than the area codes where you live?",
+  "pollType": 3,
+  "questionDisplay": "Is the area code of your mobile phone different than the area codes where you live? Select one option:\n1. Yes\n2. No",
+  "pollOptions": [
+  {
+  "option": "Yes",
+  "optionLabel": "Yes",
+  "response": "Yes",
+  "optionId": 1,
+  "parentId": -1,
+  "nextPollId": 3
+  },
+  {
+  "option": "No",
+  "optionLabel": "No",
+  "response": "No",
+  "optionId": 1,
+  "parentId": -1,
+  "nextPollId": 3
+  }
+  ]
+  },
+  {
+  "pollId": 3,
+  "pollQuestionId": 103,
+  "pollQuestion": "Have you taken part in electronic surveys?",
+  "pollType": 3,
+  "questionDisplay": "Have you taken part in electronic surveys?\n1. Yes\n2. No",
+  "pollOptions": [
+  {
+  "option": "Yes",
+  "optionLabel": "Yes",
+  "response": "Yes",
+  "optionId": 1,
+  "parentId": -1,
+  "nextPollId": 4
+  },
+  {
+  "option": "No",
+  "optionLabel": "No",
+  "response": "No",
+  "optionId": 1,
+  "parentId": -1,
+  "nextPollId": 4
+  }
+  ]
+  },
+  {
+  "pollId": 4,
+  "pollQuestionId": 1004,
+  "pollQuestion": "Which of the following electronic survey types have you used?",
+  "pollType": 5,
+  "questionDisplay": "Which of the following electronic survey types have you used? Select all that apply. \n1. Web surveys \n2. Email surveys \n3. SMS surveys \n4. Social media surveys \n",
+  "pollOptions": [
+    {
+    "option": "Web surveys",
+    "optionLabel": "Web surveys",
+    "response": "Web surveys",
+    "optionId": 1,
+    "parentId": -1,
+    "nextPollId": null
+    },
+    {
+    "option": "Email surveys",
+    "optionLabel": "Email surveys",
+    "response": "Email surveys",
+    "optionId": 2,
+    "parentId": -1,
+    "nextPollId": null
+    },
+    {
+    "option": "SMS surveys",
+    "optionLabel": "SMS surveys",
+    "response": "SMS surveys",
+    "optionId": 3,
+    "parentId": -1,
+    "nextPollId": null
+    },
+    {
+    "option": "Social media surveys",
+    "optionLabel": "Social media surveys",
+    "response": "Social media surveys",
+    "optionId": 4,
+    "parentId": -1,
+    "nextPollId": null
+    }
+    ]
+    }
+    ]
+    }
+    ]

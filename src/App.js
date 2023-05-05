@@ -1,51 +1,49 @@
 import React, { useState } from "react";
 import './App.css';
+const surveyData = require('./survey-data.json');
 function App() {
   const [survey, setSurvey] = useState(null);
   const [error, setError] = useState(null);
-  const [fileInput, setFileInput] = useState(null);
+ // const [fileInput, setFileInput] = useState(null);
   const [responses, setResponses] = useState({});
 
-  function handleInputChange(e) {
-    try {
-      const inputJson = JSON.parse(e.target.value);
-      if (Array.isArray(inputJson) && inputJson.length > 0) {
-        setSurvey(inputJson[0]);
-        setError(null);
-      } else {
-        setError("Input must be an array of survey questions");
-      }
-    } catch (e) {
-      setError("Invalid JSON format");
-    }
-  }
+  // function handleInputChange(e) {
+  //   try {
+  //     const inputJson = JSON.parse(e.target.value);
+  //     if (Array.isArray(inputJson) && inputJson.length > 0) {
+  //       setSurvey(inputJson[0]);
+  //       setError(null);
+  //     } else {
+  //       setError("Input must be an array of survey questions");
+  //     }
+  //   } catch (e) {
+  //     setError("Invalid JSON format");
+  //   }
+  // }
 
-  function handleFileChange(e) {
-    const fileReader = new FileReader();
-    fileReader.onload = (e) => {
-      try {
-        const inputJson = JSON.parse(e.target.result);
-        if (Array.isArray(inputJson) && inputJson.length > 0) {
-          setSurvey(inputJson[0]);
-          setError(null);
-        } else {
-          setError("Input must be an array of survey questions");
-        }
-      } catch (e) {
-        setError("Invalid JSON format");
-      }
-    };
-    fileReader.readAsText(e.target.files[0]);
-    setFileInput(e.target.value);
-  }
-  function handleResponse(question, response) {
-    setResponses((prevState) => ({
-      ...prevState,
-      [question.pollid]: response,
-    }));
-  }
+  // function handleFileChange() {
+  //   try {
+  //     if (Array.isArray(surveyData) && surveyData.length > 0) {
+  //       setSurvey(surveyData[0]);
+  //       setError(null);
+  //     } else {
+  //       setError("Input must be an array of survey questions");
+  //     }
+  //   } catch (e) {
+  //     setError("Invalid JSON format");
+  //   }
+  // }
+  
+  
+  
 
   function renderQuestion(question) {
+    if (question.condition) {
+    const { question: q, answer: a } = question.condition;
+    if (responses[q] !== a) {
+      return null;
+    }
+  }
     switch (question.pollType) {
       case 0: // No response/statement only
         return (
@@ -123,32 +121,96 @@ function App() {
             <button>Playback</button>
           </div>
         );
+        case 7: // List
+        return (
+        <div key={question.pollid}>
+        <h3>{question.questionDisplay}</h3>
+        <select onChange={(e) => handleResponse(question, e.target.value)}>
+        {question.countryList.map((option, index) => (
+        <option key={index} value={option}>
+        {option}
+        </option>
+        ))}
+        </select>
+        </div>
+        );
       default:
         return null; // Unsupported question type
     }
   }
- 
-
-  function handleDownload() {
-    const data = {
-      survey: survey,
-      responses: responses,
-    };
-    const fileName = "survey_responses.json";
-    const contentType = "application/json;charset=utf-8;";
-    const blob = new Blob([JSON.stringify(data)], { type: contentType });
-    if (navigator.msSaveBlob) {
-      navigator.msSaveBlob(blob, fileName);
-    } else {
-      const downloadLink = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = downloadLink;
-      a.download = fileName;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-    }
+  function handleResponse(question, response) {
+    setResponses((prevState) => ({
+      ...prevState,
+      [question.pollQuestion]: {
+        pollid: question.pollid,
+        response: response,
+      },
+    }));
   }
+  
+  // function handleDownload() {
+  //   const surveyData = survey.pollItems.map((item) => {
+  //     const response = responses[item.pollQuestion];
+  //     let formattedResponse = '';
+  //     if (response) {
+  //       if (Array.isArray(response.response)) {
+  //         formattedResponse = response.response.map((option) => option.optionLabel);
+  //       } else {
+  //         formattedResponse = response.response.optionLabel || response.response;
+  //       }
+  //     }
+  //     return {
+  //       question: item.pollQuestion,
+  //       response: formattedResponse,
+  //       pollid: item.pollid,
+  //     };
+  //   });
+  //   const data = {
+  //     survey: surveyData,
+  //   };
+  //   const fileName = "survey_responses.json";
+  //   const contentType = "application/json;charset=utf-8;";
+  //   const blob = new Blob([JSON.stringify(data)], { type: contentType });
+  //   if (navigator.msSaveBlob) {
+  //     navigator.msSaveBlob(blob, fileName);
+  //   } else {
+  //     const downloadLink = URL.createObjectURL(blob);
+  //     const a = document.createElement("a");
+  //     a.href = downloadLink;
+  //     a.download = fileName;
+  //     document.body.appendChild(a);
+  //     a.click();
+  //     document.body.removeChild(a);
+  //     URL.revokeObjectURL(downloadLink);
+  //   }
+  // }
+  
+  function handleSubmit(e) {
+    e.preventDefault();
+    let output = "";
+    if (surveyData) {
+      output += "Survey: " + surveyData.title + "\n\n";
+      surveyData[0].pollItems.forEach((question) => {
+        output += question.questionDisplay + "\n";
+        const response = responses[question.pollQuestion];
+        let formattedResponse = '';
+        if (response) {
+          if (Array.isArray(response.response)) {
+            formattedResponse = response.response.map((option) => option.optionLabel);
+          } else {
+            formattedResponse = response.response.optionLabel || response.response;
+          }
+        }
+        output += "Response: " + formattedResponse + "\n\n";
+      });
+    } else {
+      output = "No survey data available";
+    }
+    alert(output);
+  }
+  
+  
+  
 
   
   
@@ -156,15 +218,15 @@ function App() {
   return (
     <div>
       <h1>{survey ? survey.title : "Dynamic Survey"}</h1>
-      <p>{survey ? survey.referenceId : "Enter your survey JSON below or upload a file"}</p>
-      <textarea rows="10" onChange={handleInputChange} value={fileInput} />
-      <input type="file" accept=".json" onChange={handleFileChange} />
+      {/* <p>{survey ? survey.referenceId : "Enter your survey JSON below or upload a file"}</p> */}
+      {/* <textarea rows="10" onChange={handleInputChange} value={fileInput} />
+      <input type="file" accept=".json" onChange={handleFileChange} /> */}
       {error && <p style={{ color: "red" }}>{error}</p>}
-      {survey &&
-        survey.pollItems.map((question) => renderQuestion(question))}
-        <button onClick={handleDownload}>Download Responses</button>
+      {surveyData &&
+        surveyData[0].pollItems.map((question) => renderQuestion(question))}
+      <button onClick={handleSubmit}>Submit</button>
     </div>
   );
-}
+      }
 
 export default App;
